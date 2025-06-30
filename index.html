@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News Blog</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.3.0/marked.min.js"></script>
+    <link rel="stylesheet" href="src/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <h2>📰 News Archive</h2>
+            <ul id="news-list" class="news-list">
+                <li class="loading">Loading news list...</li>
+            </ul>
+        </div>
+        
+        <div class="main-content">
+            <div class="header">
+                <h1>📰 Daily News Blog</h1>
+                <div id="current-date" class="current-date">Loading latest news...</div>
+            </div>
+            
+            <div id="loading" class="loading" style="display: none;">
+                Loading article content
+            </div>
+            
+            <div id="markdown-content" class="markdown-content"></div>
+            
+            <div id="error" class="error" style="display: none;">
+                <h3>❌ Error Loading Content</h3>
+                <p>Could not load the news article. Please check that the file exists and try again.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="src/logic.js"></script>
+</body>
+</html>
