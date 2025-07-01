@@ -116,3 +116,28 @@ async function loadArticle(dateStr) {
 
 // Initialize the app
 document.addEventListener("DOMContentLoaded", loadNewsList);
+
+// ...existing code...
+
+// Dark mode toggle logic
+function setDarkMode(enabled) {
+  document.body.classList.toggle("dark-mode", enabled);
+  document.getElementById("dark-mode-toggle").textContent = enabled ? "☀️" : "🌙";
+  localStorage.setItem("darkMode", enabled ? "1" : "0");
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  loadNewsList();
+
+  // Dark mode: restore preference
+  const darkModePref = localStorage.getItem("darkMode") === "1";
+  setDarkMode(darkModePref);
+
+  // Toggle button
+  const toggleBtn = document.getElementById("dark-mode-toggle");
+  toggleBtn.addEventListener("click", () => {
+    setDarkMode(!document.body.classList.contains("dark-mode"));
+  });
+});
+
+// ...existing code...

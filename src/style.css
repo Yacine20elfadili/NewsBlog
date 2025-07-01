@@ -251,3 +251,117 @@ body {
 .sidebar::-webkit-scrollbar-thumb:hover {
     background: #a8a8a8;
 }
+
+/* ...existing code... */
+
+/* Dark mode styles */
+body.dark-mode {
+    background-color: #181a1b;
+    color: #e0e0e0;
+}
+
+body.dark-mode .sidebar {
+    background-color: #23272b;
+    border-right: 1px solid #23272b;
+    box-shadow: 2px 0 4px rgba(0,0,0,0.2);
+}
+
+body.dark-mode .sidebar h2 {
+    color: #e0e0e0;
+    border-bottom: 2px solid #0d6efd;
+}
+
+body.dark-mode .news-list li {
+    background-color: #23272b;
+    color: #e0e0e0;
+    border-left: 3px solid transparent;
+}
+
+body.dark-mode .news-list li:hover {
+    background-color: #2c3136;
+    border-left-color: #0d6efd;
+}
+
+body.dark-mode .news-list li.active {
+    background-color: #0d6efd;
+    color: #fff;
+    border-left-color: #0a58ca;
+}
+
+body.dark-mode .news-list li.loading {
+    background-color: #3a2c1a;
+    color: #ffe082;
+}
+
+body.dark-mode .main-content {
+    background: none;
+}
+
+body.dark-mode .header h1 {
+    color: #fff;
+}
+
+body.dark-mode .current-date {
+    color: #b0b0b0;
+}
+
+body.dark-mode .markdown-content {
+    background-color: #23272b;
+    color: #e0e0e0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+body.dark-mode .markdown-content h1,
+body.dark-mode .markdown-content h2,
+body.dark-mode .markdown-content h3 {
+    color: #fff;
+}
+
+body.dark-mode .markdown-content p {
+    color: #e0e0e0;
+}
+
+body.dark-mode .markdown-content blockquote {
+    border-left: 4px solid #0d6efd;
+    color: #b0b0b0;
+}
+
+body.dark-mode .markdown-content code {
+    background-color: #181a1b;
+    color: #ffb8d1;
+}
+
+body.dark-mode .loading {
+    background-color: #23272b;
+    color: #b0b0b0;
+}
+
+body.dark-mode .error {
+    background-color: #3a1a1a;
+    color: #ffb3b3;
+    border: 1px solid #a94442;
+}
+
+/* Toggle button */
+.dark-mode-toggle {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: #fff;
+    color: #23272b;
+    border: none;
+    padding: 10px 14px;
+    border-radius: 50%;
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    transition: background 0.3s, color 0.3s;
+}
+
+body.dark-mode .dark-mode-toggle {
+    background: #23272b;
+    color: #fff;
+    border: 1px solid #444;
+}
+
+/* ...existing code... */
