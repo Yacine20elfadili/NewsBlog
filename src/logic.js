@@ -84,7 +84,7 @@ async function loadArticle(dateStr) {
   currentArticle = dateStr;
 
   try {
-    const filename = `News/${dateStr}_resume.md`;
+    const filename = `News/${dateStr}_News.md`;
     const response = await fetch(filename);
 
     if (!response.ok) {
