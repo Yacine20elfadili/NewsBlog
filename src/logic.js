@@ -84,7 +84,7 @@ async function loadArticle(dateStr) {
   currentArticle = dateStr;
 
   try {
-    const filename = `News/${dateStr}_resume.md`;
+    const filename = `News/${dateStr}_News.md`;
     const response = await fetch(filename);
 
     if (!response.ok) {
@@ -109,7 +109,7 @@ async function loadArticle(dateStr) {
                     <p>Could not load the article for ${formatDate(
                       dateStr
                     )}.</p>
-                    <p><small>File: News/${dateStr}_resume.md</small></p>
+                    <p><small>File: News/${dateStr}_News.md</small></p>
                 `;
   }
 }
