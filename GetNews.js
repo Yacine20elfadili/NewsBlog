@@ -15,15 +15,15 @@ import nodemailer from 'nodemailer';
 
 dotenv.config();//load variable (keys) from .env file
 
+const news_website_url = process.env.NEWS_WEBSITE_URL;
+
 const ai = new GoogleGenAI({ apiKey: process.env.API_KEY, });
 
-const gmail_app_password = process.env.GMAIL_APP_PASSWORD;
+const gmail_app_password = process.env.GMAIL_APP_PASSWORD || "no gmail app password set";
 
-const gmail_address = process.env.GMAIL_ADDRESS; 
+const gmail_address = process.env.GMAIL_ADDRESS || "no gmail address set"; 
 
-const news_website_url = process.env.NEWS_WEBSITE_URL; 
-
-const enable_git_push = process.env.ENABLE_GIT_PUSH; 
+const enable_git_push = process.env.ENABLE_GIT_PUSH || "false";
 
 
 const MAX_RETRIES = 3;
@@ -57,6 +57,10 @@ async function delay(ms) {
 
 // Execute Git commands
 async function pushToGithub(currentDate) {
+  if (!enable_git_push || enable_git_push.toLowerCase() !== 'true') {
+    console.log("Git push is disabled. Skipping Git operations.");
+    return;
+  }
   try {
     console.log("🔄 Starting Git operations...");
     
@@ -97,7 +101,8 @@ async function pushToGithub(currentDate) {
 }
 
 async function sendSuccessNotification() {
-    if (!gmail_address || !gmail_app_password) {
+
+    if (!gmail_address || !gmail_app_password || gmail_address === "no gmail address set" || gmail_app_password === "no gmail app password set") {
         console.log('Skipping notification: GMAIL_ADDRESS or GMAIL_APP_PASSWORD not set.');
         return;
     }
@@ -371,10 +376,9 @@ async function main() {
 
       updateNewsList(generateDate());
 
-      if (enable_git_push === 'true') {
-        const currentDate = generateDate('string format');
-        await pushToGithub(currentDate);
-      }
+    
+      const currentDate = generateDate('string format');
+      await pushToGithub(currentDate);
 
       await sendSuccessNotification();
 
