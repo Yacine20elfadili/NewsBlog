@@ -5,6 +5,10 @@ import path from "path";
 // for Gemini
 import { GoogleGenAI } from "@google/genai";
 import dotenv from "dotenv";
+// for executing shell commands (github push)
+import { exec } from "child_process";
+import { promisify } from "util";
+const execAsync = promisify(exec);
 //for sending email notifications
 import nodemailer from 'nodemailer';
 
