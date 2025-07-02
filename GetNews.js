@@ -19,6 +19,8 @@ const gmail_address = process.env.GMAIL_ADDRESS;
 
 const news_website_url = process.env.NEWS_WEBSITE_URL; 
 
+const enable_git_push = process.env.ENABLE_GIT_PUSH; 
+
 
 const MAX_RETRIES = 3;
 const RETRY_DELAY = 5000;
@@ -365,7 +367,10 @@ async function main() {
 
       updateNewsList(generateDate());
 
-      await pushToGithub(generateDate('string format'));
+      if (enable_git_push === 'true') {
+        const currentDate = generateDate('string format');
+        await pushToGithub(currentDate);
+      }
 
       await sendSuccessNotification();
 
