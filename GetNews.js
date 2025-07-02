@@ -33,7 +33,7 @@ const RETRY_DELAY = 5000;
 const OUTPUT_DIR = path.join(
   process.env.USERPROFILE || process.env.HOME,
   "Desktop",
-  "NewsAutomation"
+  "NewsBlog"
 );
 
 function generateDate(format) {
