@@ -234,7 +234,6 @@ body {
     }
 }
 
-/* Scrollbar styling for sidebar */
 .sidebar::-webkit-scrollbar {
     width: 6px;
 }
@@ -251,8 +250,6 @@ body {
 .sidebar::-webkit-scrollbar-thumb:hover {
     background: #a8a8a8;
 }
-
-/* ...existing code... */
 
 /* Dark mode styles */
 body.dark-mode {
@@ -363,5 +360,3 @@ body.dark-mode .dark-mode-toggle {
     color: #fff;
     border: 1px solid #444;
 }
-
-/* ...existing code... */
