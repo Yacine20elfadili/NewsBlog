@@ -4,10 +4,10 @@ node_modules/
 
 package-lock.json
 
+package.json
+
 content/
 
 .vscode/
-
-package.json
 
 script.js
