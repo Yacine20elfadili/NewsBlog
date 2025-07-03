@@ -114,7 +114,7 @@ If Git is not installed:
 2. Copy the URL of the latest news section
 3. In your command prompt, run:
    ```cmd
-   echo NEWS_WEBSITE_URL="https://www.AnyNewsWebsite.com/latest-news" > .env
+   echo NEWS_WEBSITE_URL=https://www.AnyNewsWebsite.com/latest-news > .env
    ```
    **Replace the URL** with the link you copied
 
@@ -126,7 +126,7 @@ If Git is not installed:
 4. **Copy the key and save it safely** - don't share it with others!
 5. In command prompt, run:
    ```cmd
-   echo API_KEY="ABCDEFGHIJKLMNOPQRSTUVWXYZ" >> .env
+   echo API_KEY=ABCDEFGHIJKLMNOPQRSTUVWXYZ >> .env
    ```
    **Replace the placeholder** with your actual API key
 
@@ -148,7 +148,7 @@ To get an app password for Gmail notifications:
 12. **Save it safely** - don't share it with others!
 13. In command prompt, run:
     ```cmd
-    echo GMAIL_APP_PASSWORD="aaaa bbbb cccc dddd" >> .env
+    echo GMAIL_APP_PASSWORD=aaaa bbbb cccc dddd >> .env
     ```
     **Replace the placeholder** with your actual app password
 
@@ -156,7 +156,7 @@ To get an app password for Gmail notifications:
 
 1. Set your Gmail address:
    ```cmd
-   echo GMAIL_ADDRESS="example@gmail.com" >> .env
+   echo GMAIL_ADDRESS=example@gmail.com >> .env
    ```
    **Replace with your actual Gmail address**
 
