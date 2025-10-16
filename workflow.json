@@ -1,0 +1,136 @@
+{
+  "name": "News Automation Workflow",
+  "nodes": [
+    {
+      "parameters": {},
+      "name": "Start",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [0, 0]
+    },
+    {
+      "parameters": {
+        "url": "={{$env.NEWS_WEBSITE_URL}}",
+        "authentication": "none",
+        "options": {
+          "timeout": 90000
+        }
+      },
+      "name": "HTTP Request",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [220, 0]
+    },
+    {
+      "parameters": {
+        "jsCode": "const $ = require('cheerio').load(items[0].json.data);\nconst content = $('main#maincontent').text();\nreturn [{ json: { content } }];"
+      },
+      "name": "Extract Content",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [440, 0]
+    },
+    {
+      "parameters": {
+        "content": "={{$node[\"Extract Content\"].json.content}}",
+        "additionalFields": {
+          "model": "gemini-2.5-pro"
+        }
+      },
+      "name": "Google AI",
+      "type": "n8n-nodes-base.googleAi",
+      "typeVersion": 1,
+      "position": [660, 0],
+      "credentials": {
+        "googleApi": {
+          "id": "1",
+          "name": "Google API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "write",
+        "fileName": "={{$env.USERPROFILE}}/Desktop/NewsAutomation/News/{{$datetime.format(new Date(), \"DD-MM-YYYY\")}}_News.md",
+        "options": {}
+      },
+      "name": "Write News File",
+      "type": "n8n-nodes-base.writeFile",
+      "typeVersion": 1,
+      "position": [880, 0]
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "fileName": "={{$env.USERPROFILE}}/Desktop/NewsAutomation/NewsList.json",
+        "options": {
+          "jsonParse": true,
+          "jsonIndent": true
+        }
+      },
+      "name": "Update NewsList",
+      "type": "n8n-nodes-base.writeFile",
+      "typeVersion": 1,
+      "position": [1100, 0]
+    },
+    {
+      "parameters": {
+        "command": "git add . && git commit -m \"Auto-update: Daily news for {{$datetime.format(new Date(), 'DD-MMMM-YYYY')}}\" && git push",
+        "workingDirectory": "={{$env.USERPROFILE}}/Desktop/NewsAutomation"
+      },
+      "name": "Git Push",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [1320, 0]
+    },
+    {
+      "parameters": {
+        "fromEmail": "={{$env.GMAIL_ADDRESS}}",
+        "toEmail": "={{$env.GMAIL_ADDRESS}}",
+        "subject": "✅ News Automation Completed - {{$datetime.format(new Date(), 'DD-MMMM-YYYY')}}",
+        "text": "Your scheduled news automation completed successfully at {{$datetime.format(new Date(), 'HH:mm:ss')}}"
+      },
+      "name": "Send Email",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 1,
+      "position": [1540, 0],
+      "credentials": {
+        "smtp": {
+          "id": "2",
+          "name": "Gmail SMTP"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Start": {
+      "main": [[{"node": "HTTP Request", "type": "main", "index": 0}]]
+    },
+    "HTTP Request": {
+      "main": [[{"node": "Extract Content", "type": "main", "index": 0}]]
+    },
+    "Extract Content": {
+      "main": [[{"node": "Google AI", "type": "main", "index": 0}]]
+    },
+    "Google AI": {
+      "main": [[{"node": "Write News File", "type": "main", "index": 0}]]
+    },
+    "Write News File": {
+      "main": [[{"node": "Update NewsList", "type": "main", "index": 0}]]
+    },
+    "Update NewsList": {
+      "main": [[{"node": "Git Push", "type": "main", "index": 0}]]
+    },
+    "Git Push": {
+      "main": [[{"node": "Send Email", "type": "main", "index": 0}]]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-10-16T00:00:00.000Z",
+  "versionId": "1"
+}
